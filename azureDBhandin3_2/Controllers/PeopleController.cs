@@ -4,20 +4,48 @@ using System.Linq;
 using System.Threading.Tasks;
 using azureDBhandin3_2.Models;
 using azureDBhandin3_2.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace azureDBhandin3_2.Controllers
 {
-    public class PeopleController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class PeopleController : ControllerBase
     {
         IRepository<Person> _repo = new Repository<Person>();
-        
-        [Route("api/[controller]")]
 
-        [HttpPost]
-        public async void CreatePersonAsync([FromBody] Person person)
+        // GET: api/People
+        [HttpGet]
+        public IEnumerable<string> Get()
         {
-            await _repo.CreatePersonAsync(person);
+            return new string[] { "value1", "value2" };
+        }
+
+        // GET: api/People/5
+        [HttpGet("{id}", Name = "Get")]
+        public string Get(int id)
+        {
+            return "value";
+        }
+
+        // POST: api/People
+        [HttpPost]
+        public void Post([FromBody] string value)
+        {
+
+        }
+
+        // PUT: api/People/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
+
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
         }
     }
 }

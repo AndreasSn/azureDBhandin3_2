@@ -9,7 +9,7 @@ namespace azureDBhandin3_2.Models
 {
     public class Person
     {
-        public long Id { get; set; }
+        public string id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Nationality { get; set; }
