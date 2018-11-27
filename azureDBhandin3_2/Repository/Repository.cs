@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
 using Microsoft.EntityFrameworkCore;
 
 namespace azureDBhandin3_2.Repository
@@ -10,11 +12,46 @@ namespace azureDBhandin3_2.Repository
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         protected readonly DbContext Context;
+        private  readonly string DatabaseId = "PersonDB";
+        private  readonly string CollectionId = "persons";
+        private const string EndpointUri = "https://localhost:8081";
+        private const string PrimaryKey = "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==";
+        private static DocumentClient client;
 
-        public Repository(DbContext context)
+        public async void Initialize()
         {
-            Context = context;
+            client = new DocumentClient(new Uri(EndpointUri), PrimaryKey);
+            var database = await client.CreateDatabaseIfNotExistsAsync(new Database { Id = "PersonDB" });
+            CreateCollectionIfNotExist();
         }
+
+        private async void CreateCollectionIfNotExist()
+        {
+            DocumentCollection myCollection = new DocumentCollection();
+            myCollection.Id = "persons";
+
+            try
+            {
+                await client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId));
+            }
+            catch (DocumentClientException e)
+            {
+                if (e.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    await client.CreateDocumentCollectionAsync(
+                        UriFactory.CreateDatabaseUri(DatabaseId),
+                        new DocumentCollection { Id = CollectionId });
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+
+
+
 
         public TEntity Get(long id)
         {
