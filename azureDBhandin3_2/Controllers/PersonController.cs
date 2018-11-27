@@ -37,12 +37,15 @@ namespace azureDBhandin3_2.Controllers
             _repo.CreatePersonAsync(person);
         }
 
+
         // PUT: api/Person/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(string id, [FromBody] Person person)
         {
-
+            _repo.UpdateItemAsync(id, person);
         }
+
+
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
