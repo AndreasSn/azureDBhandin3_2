@@ -29,7 +29,6 @@ namespace azureDBhandin3_2.Repository
         {
             DocumentCollection myCollection = new DocumentCollection();
             myCollection.Id = "persons";
-
             try
             {
                 await client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId));
