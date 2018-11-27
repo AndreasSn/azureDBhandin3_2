@@ -11,7 +11,5 @@ namespace azureDBhandin3_2.Models
         public string PostalCode { get; set; }
         public string Country { get; set; }
         public string CityName { get; set; }
-
-        public ICollection<Address> Address { get; set; }
     }
 }

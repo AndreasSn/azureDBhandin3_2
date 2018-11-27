@@ -17,20 +17,17 @@ namespace azureDBhandin3_2
 {
     public class Program
     {
-        private const string EndpointUri = "https://localhost:8081";
-        private const string PrimaryKey = "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==";
+        //private const string EndpointUri = "https://localhost:8081";
+        //private const string PrimaryKey = "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==";
         private DocumentClient client;
         public static  Repository<Person> _repo => new Repository<Person>();
         public static void Main(string[] args)
         {
-
             _repo.Initialize();
+
             CreateWebHostBuilder(args).Build().Run();
-            
         }
-
-
-
+        
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();

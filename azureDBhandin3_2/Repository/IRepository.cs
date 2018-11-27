@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using azureDBhandin3_2.Models;
+using Microsoft.Azure.Documents;
 
 namespace azureDBhandin3_2.Repository
 {
@@ -10,6 +12,7 @@ namespace azureDBhandin3_2.Repository
     {
         void Initialize();
 
+        Task<Document> CreatePersonAsync(Person person);
 
         TEntity Get(long id);
         IEnumerable<TEntity> GetAll();
