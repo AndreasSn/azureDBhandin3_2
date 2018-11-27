@@ -52,6 +52,11 @@ namespace azureDBhandin3_2.Repository
             return await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId), person);
         }
 
+        public async Task<Document> getPerson()
+        {
+            
+        }
+
 
 
       //  public TEntity Get(long id)
