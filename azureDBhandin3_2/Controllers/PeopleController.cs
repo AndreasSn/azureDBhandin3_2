@@ -12,7 +12,7 @@ namespace azureDBhandin3_2.Controllers
     {
         IRepository<Person> _repo = new Repository<Person>();
         
-        [Route("api/person")]
+        [Route("api/[controller]")]
 
         [HttpPost]
         public async void CreatePersonAsync([FromBody] Person person)
