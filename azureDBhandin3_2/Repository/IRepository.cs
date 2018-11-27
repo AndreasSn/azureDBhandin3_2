@@ -13,19 +13,19 @@ namespace azureDBhandin3_2.Repository
         void Initialize();
 
         Task<Document> CreatePersonAsync(Person person);
-
-        TEntity Get(long id);
-        IEnumerable<TEntity> GetAll();
-        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
-
-        // This method was not in the videos, but I thought it would be useful to add.
-        TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
-
-        void Add(TEntity entity);
-        void AddRange(IEnumerable<TEntity> entities);
-
-        void Remove(TEntity entity);
-        void RemoveRange(IEnumerable<TEntity> entities);
-        void Put(TEntity entity);
+       //
+       // TEntity Get(long id);
+       // IEnumerable<TEntity> GetAll();
+       // IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+       //
+       // // This method was not in the videos, but I thought it would be useful to add.
+       // TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
+       //
+       // void Add(TEntity entity);
+       // void AddRange(IEnumerable<TEntity> entities);
+       //
+       // void Remove(TEntity entity);
+       // void RemoveRange(IEnumerable<TEntity> entities);
+       // void Put(TEntity entity);
     }
 }
