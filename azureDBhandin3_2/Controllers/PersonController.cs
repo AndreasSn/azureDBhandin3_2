@@ -25,9 +25,9 @@ namespace azureDBhandin3_2.Controllers
 
         // GET: api/Person/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public Person Get(string id)
         {
-            return "value";
+            return _repo.getPerson(id);
         }
 
         // POST: api/Person
@@ -39,14 +39,14 @@ namespace azureDBhandin3_2.Controllers
 
         // PUT: api/Person/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(string id, [FromBody] Person person)
         {
 
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
         }
     }

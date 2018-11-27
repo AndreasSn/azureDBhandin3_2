@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using azureDBhandin3_2.Models;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace azureDBhandin3_2.Repository
@@ -52,9 +53,16 @@ namespace azureDBhandin3_2.Repository
             return await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId), person);
         }
 
-        public async Task<Document> getPerson()
+        public Person getPerson(string Id)
         {
-            
+            var query = from db in client.CreateDocumentQuery<Person>(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId))
+                where db.id == Id
+                select db;
+
+            Person p1 = query.FirstOrDefault();
+
+
+            return (dynamic)p1;
         }
 
 
