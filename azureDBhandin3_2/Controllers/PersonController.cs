@@ -6,6 +6,8 @@ using azureDBhandin3_2.Models;
 using azureDBhandin3_2.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
 
 namespace azureDBhandin3_2.Controllers
 {
@@ -18,16 +20,17 @@ namespace azureDBhandin3_2.Controllers
 
         // GET: api/Person
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Person> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _repo.getPersons().Result;
         }
 
         // GET: api/Person/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public Person Get(string id)
         {
-            return "value";
+            var person = _repo.getPerson(id);
+            return person.Result;
         }
 
         // POST: api/Person
@@ -49,8 +52,9 @@ namespace azureDBhandin3_2.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
+            _repo.DeletePerson(id);
         }
     }
 }

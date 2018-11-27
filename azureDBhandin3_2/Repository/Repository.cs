@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using azureDBhandin3_2.Models;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace azureDBhandin3_2.Repository
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<T> : IRepository<T> where T : class
     {
         //protected readonly DbContext Context;
         private  readonly string DatabaseId = "PersonDB";
@@ -52,14 +53,36 @@ namespace azureDBhandin3_2.Repository
             return await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId), person);
         }
 
-        //public async Task<Document> getPerson()
-        //{
-            
-        //}
+        public async Task<T> getPerson(string id)
+        {
+            Document document = await client.ReadDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id));
+            return (T)(dynamic)document;
+        }
+
+        public async Task<IEnumerable<T>> getPersons()
+        {
+            IDocumentQuery<T> query = client.CreateDocumentQuery<T>(
+                    UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId))
+                .AsDocumentQuery();
+
+            List<T> results = new List<T>();
+
+            while (query.HasMoreResults)
+            {
+                results.AddRange(await query.ExecuteNextAsync<T>());
+            }
+            return results;
+        }
+
 
         public async Task<Document> UpdateItemAsync(string id, Person person)
         {
             return await client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id), person);
+        }
+
+        public async void DeletePerson(string id)
+        {
+            await client.DeleteDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id));
         }
 
 

@@ -8,13 +8,19 @@ using Microsoft.Azure.Documents;
 
 namespace azureDBhandin3_2.Repository
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<T> where T : class
     {
         void Initialize();
 
         Task<Document> CreatePersonAsync(Person person);
 
         Task<Document> UpdateItemAsync(string id, Person person);
+
+        Task<T> getPerson(string id);
+
+        Task<IEnumerable<T>> getPersons();
+
+        void DeletePerson(string id);
         //
         // TEntity Get(long id);
         // IEnumerable<TEntity> GetAll();

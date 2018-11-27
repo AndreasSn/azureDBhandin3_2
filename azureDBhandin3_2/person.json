@@ -1,0 +1,41 @@
+// PERSON
+[
+  {
+    "id": "string",
+    "firstName": "string",
+    "lastName": "string",
+    "nationality": "string",
+    "gender": "string",
+    "address": [
+      {
+        "streetName": "string",
+        "streetNumber": "string",
+        "city": {
+          "postalCode": "string",
+          "country": "string",
+          "cityName": "string"
+        }
+      },
+      {
+        "streetName": "string",
+        "streetNumber": "string",
+        "city": {
+          "postalCode": "string",
+          "country": "string",
+          "cityName": "string"
+        }
+      }
+    ],
+    "email": [
+      {
+        "emailAddress": "string"
+      },
+      {
+        "emailAddress": "string"
+      },
+      {
+        "emailAddress": "string"
+      }
+    ]
+  }
+]
